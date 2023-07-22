@@ -4,11 +4,14 @@ import os
 from english_words import get_english_words_set
 from random import randint
 import pandas as pd
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 words = get_english_words_set(['web2'], lower=True)
 
-BASE_FONT_PATH = "/System/Library/Fonts/Supplemental"
+BASE_FONT_PATH = os.getenv('FONT_PATH')
 
 font_mappings = {
     "San Serif": f"{BASE_FONT_PATH}/Arial.ttf",
