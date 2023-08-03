@@ -5,19 +5,19 @@ from english_words import get_english_words_set
 from random import randint
 import pandas as pd
 from dotenv import load_dotenv
+from tqdm import tqdm
 
 load_dotenv()
 
 
 words = get_english_words_set(['web2'], lower=True)
 
+print(len(words))
+
 BASE_FONT_PATH = os.getenv('FONT_PATH')
 
 font_mappings = {
-    "San Serif": f"{BASE_FONT_PATH}/Arial.ttf",
-    "Serif": f"{BASE_FONT_PATH}/Times New Roman.ttf",
-    "Hand-Painted": f"{BASE_FONT_PATH}/SignPainter.ttc",
-    "cursive": f"{BASE_FONT_PATH}/Zapfino.ttf"
+    "San Serif": f"{BASE_FONT_PATH}/Arial Bold.ttf",
 }
 
 area_mappings = {
@@ -45,16 +45,16 @@ def genImage(area: str, font: str, text: str):
     text_pos = area_mappings[area]
 
     # Create a 400x400 image
-    img = Image.new('L', (400, 400), color=0)
+    img = Image.new('L', (64, 64))
 
     # Draw text on the image
     d = ImageDraw.Draw(img)
 
     # Load a font
-    font_loaded = ImageFont.truetype(font_file, 30)
+    font_loaded = ImageFont.truetype(font_file, 12)
 
     # Draw text with 3d perspective
-    d.text(text_pos, text, fill=255, font=font_loaded)
+    d.text((0,25), text, fill=255, font=font_loaded)
 
     if area == "North":
         pos = "on the top"
@@ -84,11 +84,11 @@ if __name__ == "__main__":
     if not os.path.exists("./imgs/"):
       os.mkdir("imgs")
 
-    for i, word in enumerate(words):
+    for i, word in tqdm(enumerate(words), total=20):
       if (len(word) > 10):
           continue
-
-      if (i == 20):
+      
+      if i >= 20:
           break
       
       # Select a cardinality at random.

@@ -1,3 +1,10 @@
+# Analysis of visual text generation
+
+This repo contains the code for my independent study research "Analysis of visual text generation".
+
+The imagen open source code is provide via https://github.com/lucidrains/imagen-pytorch, the local copy in this
+repo provides the modifications of that project needed for this research.
+
 # Text-In-Image Dataset
 
 This dataset provides a simple baseline for text within the image space with binary colors. The dataset is generated programmatically with the image manipulation library `PIL`. The goal is to generate text inside images
